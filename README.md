@@ -51,48 +51,48 @@ After running the commands, you will have a text file containing the encrypted p
 
 Here’s a list of all the command line switches and example configurations.
 ```
-List
+-List
 ```
 The path to a CSV file with a list of IP addresses and device names to monitor separated by a comma.
 ```
-O
+-O
 ```
 The path where the HTML or CSV report should be output to. The filename will be NetDev-Status-Report.html/csv.
 ```
-Refresh
+-Refresh
 ```
 The number of seconds that she script should wait before running again. The minimum is 300 seconds (5 minutes)
 and the maximum is 28800 (8 hours). If not configured the script will run once and then exit.
 ```
-Light
+-Light
 ```
 Use a light theme for the web page generated. This setting had no effect on a CSV file report.
 ```
-Csv
+-Csv
 ```
 Output a CSV file instead of a HTML file for the report.
 ```
-SendTo
+-SendTo
 ```
 The e-mail address the log should be sent to.
 ```
-From
+-From
 ```
 The from address the log should be sent from.
 ```
-Smtp
+-Smtp
 ```
 The DNS or IP address of the SMTP server.
 ```
-User
+-User
 ```
 The user account to connect to the SMTP server.
 ```
-Pwd
+-Pwd
 ```
 The txt file containing the encrypted password for the user account.
 ```
-UseSsl
+-UseSsl
 ```
 Connect to the SMTP server using SSL.
 
