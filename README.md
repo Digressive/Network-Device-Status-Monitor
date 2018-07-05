@@ -1,4 +1,4 @@
-# Network-Device-Status-Monitor
+# Network Device Status Monitor
 PowerShell based network attached device monitor
 
 Network Device Status Monitor can also be downloaded from:
