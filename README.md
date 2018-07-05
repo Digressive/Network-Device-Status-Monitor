@@ -96,6 +96,8 @@ The txt file containing the encrypted password for the user account.
 ```
 Connect to the SMTP server using SSL.
 
+### Example
+
 ```
 NetDev-Status.ps1 -List C:\foo\networkdevices.csv -O C:\foo -Refresh 300 -Light
 ```
