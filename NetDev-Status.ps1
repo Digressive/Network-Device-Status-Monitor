@@ -1,6 +1,6 @@
 ﻿<#PSScriptInfo
 
-.VERSION 1.0
+.VERSION 1.1
 
 .GUID ea6c9f59-1659-4ab5-9d2f-8aa26a7d32b9
 
@@ -58,7 +58,7 @@
 
     .PARAMETER Refresh
     The number of seconds that she script should wait before running again. The minimum is 300 seconds (5 minutes)
-    and the maximum is 28800 (8 hours). If not configured the script will run once and then exit.
+    and the maximum is 28800 (8 hours). If not configured the script will run once and then end.
 
     .PARAMETER Light
     Use a light theme for the web page generated. This setting had no effect on a CSV file report.
@@ -142,11 +142,19 @@ Do
         $OutputFile = "$OutputPath\NetDev-Status-Report.htm"
     }
 
-    ## Settings colours used in HTML report as variables.
+    ## Using variables for HTML and CSS so we don't need to use escape characters below.
     $Green = "00e600"
     $Grey = "e6e6e6"
     $Red = "ff4d4d"
     $Black = "1a1a1a"
+    $CssError = "error"
+    $CssFormat = "format"
+    $CssSpinner = "spinner"
+    $CssRect1 = "rect1"
+    $CssRect2 = "rect2"
+    $CssRect3 = "rect3"
+    $CssRect4 = "rect4"
+    $CssRect5 = "rect5"
 
     ## Import the CSV file data.
     $DeviceList = Import-Csv -Path $DeviceFile
@@ -230,7 +238,7 @@ Do
             {
                 If ($Entry.Status -eq $True)
                 {
-                    Add-Content -Path "$OutputFile" -Value "$($Entry.DeviceIP),$($Entry.DeviceName),Online,$($Entry.ResponseTime) ms"
+                    Add-Content -Path "$OutputFile" -Value "$($Entry.DeviceIP),$($Entry.DeviceName),Online,$($Entry.ResponseTime)ms"
                 }
 
                 Else
@@ -247,23 +255,29 @@ Do
             If ($Light)
             {
                 $HTML = '<style type="text/css">
-                    p {font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;font-size:14px}
+                    p {font-family:Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;font-size:14px}
                     p {color:#000000;}
-                    #Header{font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;width:100%;border-collapse:collapse;}
-                    #Header td, #Header th {font-size:15px;text-align:left;border:1px solid #1a1a1a;padding:2px 2px 2px 7px;color:#ffffff;}
+                    #Header{font-family:Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;width:100%;border-collapse:collapse;}
+                    #Header td, #Header th {font-size:14px;text-align:left;}
                     #Header tr.alt td {color:#ffffff;background-color:#404040;}
-                    #Header tr:nth-child(even) {background-color:#404040;}
                     #Header tr:nth-child(even) {background-color:#404040;}
                     #Header tr:nth-child(odd) {background-color:#737373;}
                     body {background-color: #d9d9d9;}
-                    div {background-color: #d9d9d9;-webkit-animation-name: alert;animation-duration: 4s;animation-iteration-count: infinite;animation-direction: alternate;}
-                    @-webkit-keyframes alert {from {background-color:rgba(217,0,0,0);} to {background-color:rgba(217,0,0,1);}
-                    @keyframes alert {from {background-color:rgba(217,0,0,0);} to {background-color:rgba(217,0,0,1);}
+                    .spinner {width: 40px;height: 20px;font-size: 14px;padding: 5px;}
+                    .spinner > div {background-color: #00e600;height: 100%;width: 3px;display: inline-block;animation: sk-stretchdelay 3.2s infinite ease-in-out;}
+                    .spinner .rect2 {animation-delay: -3.1s;}
+                    .spinner .rect3 {animation-delay: -3.0s;}
+                    .spinner .rect4 {animation-delay: -2.9s;}
+                    .spinner .rect5 {animation-delay: -2.8s;}
+                    @keyframes sk-stretchdelay {0%, 40%, 100% {transform: scaleY(0.4);} 20% {transform: scaleY(1.0);}}
+                    .format {position: relative;overflow: hidden;padding: 5px;}
+                    .error {-webkit-animation-name: alert;animation-duration: 4s;animation-iteration-count: infinite;animation-direction: alternate;padding: 5px;}
+                    @keyframes alert {from {background-color:rgba(117,0,0,0);} to {background-color:rgba(117,0,0,1);}}
                     </style>
                     <head><meta http-equiv="refresh" content="300"></head>'
 
                 $HTML += "<html><body>
-                    <p><font color=#$Black>Status refreshed on: $(Get-Date -Format G)</font></p>
+                    <p><font color=#$Black>Last update: $(Get-Date -Format G)</font></p>
                     <table border=0 cellpadding=0 cellspacing=0 id=header>"
             }
 
@@ -271,67 +285,76 @@ Do
             Else
             {
                 $HTML = '<style type="text/css">
-                    p {font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;font-size:14px}
+                    p {font-family:Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;font-size:14px}
                     p {color:#ffffff;}
-                    #Header{font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;width:100%;border-collapse:collapse;}
-                    #Header td, #Header th {font-size:15px;text-align:left;border:1px solid #1a1a1a;padding:2px 2px 2px 7px;color:#ffffff;}
-                    #Header tr.alt td {color:#ffffff;background-color:#1a1a1a;}
-                    #Header tr:nth-child(even) {background-color:#1a1a1a;}
-                    #Header tr:nth-child(odd) {background-color:#3b3b3b;}
-                    body {background-color: #1a1a1a;}
-                    div {background-color: #1a1a1a;-webkit-animation-name: alert;animation-duration: 4s;animation-iteration-count: infinite;animation-direction: alternate;}
-                    @-webkit-keyframes alert {from {background-color:rgba(217,0,0,0);} to {background-color:rgba(217,0,0,1);}
-                    @keyframes alert {from {background-color:rgba(217,0,0,0);} to {background-color:rgba(217,0,0,1);}
+                    #Header{font-family:Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;width:100%;border-collapse:collapse;}
+                    #Header td, #Header th {font-size:14px;text-align:left;}
+                    #Header tr:nth-child(even) {background-color:#1B1B1B;}
+                    #Header tr:nth-child(odd) {background-color:#0F0F0F;}
+                    body {background-color: #0F0F0F;}
+                    .spinner {width: 40px;height: 20px;font-size: 14px;padding: 5px;}
+                    .spinner > div {background-color: #00e600;height: 100%;width: 3px;display: inline-block;animation: sk-stretchdelay 3.2s infinite ease-in-out;}
+                    .spinner .rect2 {animation-delay: -3.1s;}
+                    .spinner .rect3 {animation-delay: -3.0s;}
+                    .spinner .rect4 {animation-delay: -2.9s;}
+                    .spinner .rect5 {animation-delay: -2.8s;}
+                    @keyframes sk-stretchdelay {0%, 40%, 100% {transform: scaleY(0.4);} 20% {transform: scaleY(1.0);}}
+                    .format {position: relative;overflow: hidden;padding: 5px;}
+                    .error {animation-name: alert;animation-duration: 4s;animation-iteration-count: infinite;animation-direction: alternate;padding: 5px;}
+                    @keyframes alert {from {background-color:rgba(117,0,0,0);} to {background-color:rgba(117,0,0,1);}}
                     </style>
                     <head><meta http-equiv="refresh" content="300"></head>'
 
                 $HTML += "<html><body>
-                    <p><font color=#$Grey>Status refreshed on: $(Get-Date -Format G)</font></p>
+                    <p><font color=#$Grey>Last update: $(Get-Date -Format G)</font></p>
                     <table border=0 cellpadding=0 cellspacing=0 id=header>"
             }
 
             ## Highlight the entry if it is offline.
             ForEach($Entry in $Result)
             {
-                If ($Entry.Status -eq $True)
+                If ($RefreshTime -ne 0)
                 {
-                    $HTML += "<td><font color=#$Green>&#10004</font></td>"
-                }
+                    If ($Entry.Status -eq $True)
+                    {
+                        $HTML += "<td><div class=$CssSpinner><div class=$CssRect1></div> <div class=$CssRect2></div> <div class=$CssRect3></div> <div class=$CssRect4></div> <div class=$CssRect5></div></div></td>"
+                    }
 
-                Else
-                {
-                    $HTML += "<td><font color=#$Red>&#10008</font></td>"
+                    Else
+                    {
+                        $HTML += "<td><div class=$CssError><font color=#$Red>OFFL</font></div></td>"
+                    }
                 }
                 
                 If ($Entry.Status -eq $True)
                 {
-                    $HTML += "<td><font color=#$Green>$($Entry.DeviceIP)</font></td>"
+                    $HTML += "<td><div class=$CssFormat><font color=#$Green>$($Entry.DeviceIP)</font></div></td>"
                 }
 
                 Else
                 {
-                    $HTML += "<td><div><font color=#$Red>$($Entry.DeviceIP)</font></div></td>"
+                    $HTML += "<td><div class=$CssError><font color=#$Red>$($Entry.DeviceIP)</font></div></td>"
                 }
 
                 If ($Entry.Status -eq $True)
                 {
-                    $HTML += "<td><font color=#$Green>$($Entry.DeviceName)</font></td>"
+                    $HTML += "<td><div class=$CssFormat><font color=#$Green>$($Entry.DeviceName)</font></div></td>"
                 }
 
                 Else
                 {
-                    $HTML += "<td><div><font color=#$Red>$($Entry.DeviceName)</font></div></td>"
+                    $HTML += "<td><div class=$CssError><font color=#$Red>$($Entry.DeviceName)</font></div></td>"
                 }
 
                 If ($Entry.ResponseTime -ne $Null)
                 {
-                    $HTML += "<td><font color=#$Green>$($Entry.ResponseTime) ms</font></td>
+                    $HTML += "<td><div class=$CssFormat><font color=#$Green>$($Entry.ResponseTime)ms</font></div></td>
                     </tr>"
                 }
 
                 Else
                 {
-                    $HTML += "<td><div><font color=#$Red>Offline</font></div></td>
+                    $HTML += "<td><div class=$CssError><font color=#$Red>OFFL</font></div></td>
                     </tr>"
                 }
             }
