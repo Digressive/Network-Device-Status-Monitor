@@ -4,7 +4,7 @@ PowerShell based network attached device monitor
 
 Network Device Status Monitor can also be downloaded from:
 
-* [The Microsoft TechNet Gallery](https://gallery.technet.microsoft.com/Network-Device-Status-d4bd859a)
+* [The Microsoft TechNet Gallery](https://gallery.technet.microsoft.com/Network-Device-Status-088f7b00?redir=0)
 * [The PowerShell Gallery](https://www.powershellgallery.com/packages/NetDev-Status)
 * For full instructions and documentation, [visit my blog post](https://gal.vin/2018/06/14/network-device-status)
 
