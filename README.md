@@ -24,14 +24,9 @@ Tweet me if you have questions: [@mikegalvin_](https://twitter.com/mikegalvin_)
 
 ### CSV File Structure
 
-The structure of the CSV file is as follows:
+The first line of the CSV file should be the column names so the script (and you) know what each column is for.
 
-```
-IP,Name
-10.30.1.1,Router
-10.30.1.5,NAS
-10.30.1.10,Switch 1
-```
+Please see the networkdevices-example.csv file for how to structure your own file.
 
 The utility has been tested running on Windows 10 and Windows Server 2016, monitoring PCs and Servers running Windows 10, Windows Server 2016, Windows Server 2012 R2, and Windows Server 2008 R2. The utility must be run as a user with administrator-level privileges to the systems it is monitoring.
 
@@ -69,7 +64,7 @@ and the maximum is 28800 (8 hours). If not configured the script will run once a
 ```
 Use a light theme for the web page generated. This setting had no effect on a CSV file report.
 ```
--Csv
+-csv
 ```
 Output a CSV file instead of a HTML file for the report.
 ```

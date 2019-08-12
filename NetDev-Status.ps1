@@ -49,9 +49,7 @@
     
     .PARAMETER List
     The path to a CSV file with a list of IP addresses and device names to monitor separated by a comma.
-    Example:
-    IP,Name
-    127.0.0.1,localhost
+    Please see the networkdevices-example.csv file for how to structure your own file.
 
     .PARAMETER O
     The path where the HTML or CSV report should be output to. The filename will be NetDev-Status-Report.html/csv.
@@ -63,7 +61,7 @@
     .PARAMETER Light
     Use a light theme for the web page generated. This setting had no effect on a CSV file report.
 
-    .PARAMETER Csv
+    .PARAMETER csv
     Output a CSV file instead of a HTML file for the report.
 
     .PARAMETER SendTo
@@ -106,7 +104,7 @@ Param(
     [ValidateRange(300,28800)]
     [int]$RefreshTime,
     [switch]$Light,
-    [switch]$Csv,
+    [switch]$csv,
     [Alias("SendTo")]
     [string]$MailTo,
     [Alias("From")]
@@ -123,14 +121,14 @@ Param(
 Do
 {
     ## Setting the location of the CSV file if configured.
-    If ($Csv)
+    If ($csv)
     {
         $OutputFile = "$OutputPath\NetDev-Status-Report.csv"
         
         ## If the CSV file already exists, clear it so information is not duplicated.
-        $CsvT = Test-Path -Path $OutputFile
+        $csvT = Test-Path -Path $OutputFile
 
-        If ($CsvT)
+        If ($csvT)
         {
             Clear-Content -Path $OutputFile
         }
@@ -229,10 +227,10 @@ Do
     }
 
     ## If the result is not empty, put the report file together.
-    If ($Result -ne $null)
+    If ($Null -ne $Result)
     {
         ## If CSV report is specified, output a CSV file.
-        If ($Csv)
+        If ($csv)
         {
             ForEach($Entry in $Result)
             {
@@ -346,7 +344,7 @@ Do
                     $HTML += "<td><div class=$CssError><font color=#$Red>$($Entry.DeviceName)</font></div></td>"
                 }
 
-                If ($Entry.ResponseTime -ne $Null)
+                If ($Null -ne $Entry.ResponseTime)
                 {
                     $HTML += "<td><div class=$CssFormat><font color=#$Green>$($Entry.ResponseTime)ms</font></div></td>
                     </tr>"
