@@ -1,4 +1,4 @@
-# Network Device Status Monitor
+# Network Device Status Monitor (NDSM)
 
 PowerShell based network attached device monitor
 
@@ -36,7 +36,7 @@ The password used for SMTP server authentication must be in an encrypted text fi
 
 Please note: This is only required if you need to authenticate to the SMTP server when send the log via e-mail.
 
-```
+``` powershell
 $creds = Get-Credential
 $creds.Password | ConvertFrom-SecureString | Set-Content c:\scripts\ps-script-pwd.txt
 ```
@@ -46,55 +46,78 @@ After running the commands, you will have a text file containing the encrypted p
 ### Configuration
 
 Here’s a list of all the command line switches and example configurations.
-```
+
+``` txt
 -List
 ```
+
 The path to a CSV file with a list of IP addresses and device names to monitor separated by a comma.
-```
+
+``` txt
 -O
 ```
+
 The path where the HTML or CSV report should be output to. The filename will be NetDev-Status-Report.html/csv.
-```
+
+``` txt
 -Refresh
 ```
+
 The number of seconds that she script should wait before running again. The minimum is 300 seconds (5 minutes)
 and the maximum is 28800 (8 hours). If not configured the script will run once and then exit.
-```
+
+``` txt
 -Light
 ```
+
 Use a light theme for the web page generated. This setting had no effect on a CSV file report.
-```
+
+``` txt
 -csv
 ```
+
 Output a CSV file instead of a HTML file for the report.
-```
+
+``` txt
 -SendTo
 ```
+
 The e-mail address the log should be sent to.
-```
+
+``` txt
 -From
 ```
+
 The from address the log should be sent from.
-```
+
+``` txt
 -Smtp
 ```
+
 The DNS or IP address of the SMTP server.
-```
+
+``` txt
 -User
 ```
+
 The user account to connect to the SMTP server.
-```
+
+``` txt
 -Pwd
 ```
+
 The txt file containing the encrypted password for the user account.
-```
+
+``` txt
 -UseSsl
 ```
+
 Connect to the SMTP server using SSL.
 
 ### Example
 
-```
+``` txt
 NetDev-Status.ps1 -List C:\foo\networkdevices.csv -O C:\foo -Refresh 300 -Light
 ```
+
 The script will execute using the list of network devices and output a html report called NetDev-Status-Report.htm to C:\foo. The status of the network devices will refresh every 5 minutes, and the web page will have a light theme instead of a dark theme.
