@@ -1,12 +1,12 @@
 ﻿<#PSScriptInfo
 
-.VERSION 1.1
+.VERSION 1.2
 
 .GUID ea6c9f59-1659-4ab5-9d2f-8aa26a7d32b9
 
 .AUTHOR Mike Galvin Contact: mike@gal.vin twitter.com/mikegalvin_
 
-.COMPANYNAME
+.COMPANYNAME Mike Galvin
 
 .COPYRIGHT (C) Mike Galvin. All rights reserved.
 
@@ -64,6 +64,9 @@
     .PARAMETER csv
     Output a CSV file instead of a HTML file for the report.
 
+    .PARAMETER Subject
+    The email subject that the email should have. Encapulate with single or double quotes.
+    
     .PARAMETER SendTo
     The e-mail address the log should be sent to.
 
@@ -367,7 +370,13 @@ Do
         ## If email was configured, set the variables for the email subject and body.
         If ($SmtpServer)
         {
-            $MailSubject = "Network Device Status Report"
+            # If no subject is set, use the string below
+            If ($Null -eq $MailSubject)
+            {
+                $MailSubject = "Network Device Status Report"
+            }
+            
+            # Set the mail body to be the contents of the output file.
             $MailBody = Get-Content -Path $OutputFile | Out-String
 
             ## If an email password was configured, create a variable with the username and password.

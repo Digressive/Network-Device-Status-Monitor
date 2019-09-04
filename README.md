@@ -79,6 +79,12 @@ Use a light theme for the web page generated. This setting had no effect on a CS
 Output a CSV file instead of a HTML file for the report.
 
 ``` txt
+-Subject
+```
+
+The email subject that the email should have. Encapulate with single or double quotes.
+
+``` txt
 -SendTo
 ```
 
