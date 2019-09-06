@@ -108,6 +108,8 @@ Param(
     [int]$RefreshTime,
     [switch]$Light,
     [switch]$csv,
+    [alias("Subject")]
+    [string]$MailSubject,
     [Alias("SendTo")]
     [string]$MailTo,
     [Alias("From")]
