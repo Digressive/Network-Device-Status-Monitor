@@ -1,6 +1,6 @@
 # Network Device Status Monitor (NDSM)
 
-PowerShell based network attached device monitor
+PowerShell based network attached device monitor.
 
 Network Device Status Monitor can also be downloaded from:
 
@@ -14,13 +14,13 @@ Tweet me if you have questions: [@mikegalvin_](https://twitter.com/mikegalvin_)
 
 ## Features and Requirements
 
-* The utility will display the network device name and IP address as specified in the CSV file.
-* The utility will display Online/Offline status of the specified devices.
-* The utility will display the response time of the network device.
-* The utility can display the results as either a CSV file or a HTML file.
-* The utility can be configured to monitor continuously, or run once.
-* The utility can be configured to e-mail the results.
-* The script has been tested running on Windows 10 and Windows Server 2016, monitoring network devices with IP v4 addresses.
+* The utility can output the network device name and IP address as specified in the CSV file.
+* Online/Offline status of the specified devices will be displayed.
+* The utility will display the response time of online network devices.
+* The utility can be configured to output the report as either a CSV file or a HTML file.
+* The utility can be configured to run in ‘monitor’ mode or as a one shot report.
+* The utility can be configured to email the report, or send offline alerts to Microsoft Teams
+* The script has been tested running on Windows 10, Windows Server 2016 and 2019 monitoring network devices with IPv4 addresses.
 
 ### CSV File Structure
 
@@ -45,13 +45,25 @@ After running the commands, you will have a text file containing the encrypted p
 
 ### Configuration
 
-Here’s a list of all the command line switches and example configurations.
+Here’s a list of all the command line switches.
 
 ``` txt
 -List
 ```
 
-The path to a CSV file with a list of IP addresses and device names to monitor separated by a comma.
+The full path to a CSV file with a list of IP addresses and device names to monitor, separated by a comma.
+
+``` txt
+-Teams
+```
+
+The full path to a txt file containing the webhook URL for Teams. If this setting is configured other output settings will be ignored.
+
+``` txt
+-FR
+```
+
+Use this switch to send a full report to Teams. This setting only has an effect when used with the -Teams switch.
 
 ``` txt
 -O
@@ -63,7 +75,7 @@ The path where the HTML or CSV report should be output to. The filename will be 
 -Refresh
 ```
 
-The number of seconds that she script should wait before running again. The minimum is 300 seconds (5 minutes)
+Enable monitoring mode. The number of seconds that she script should wait before running again. The minimum is 300 seconds (5 minutes)
 and the maximum is 28800 (8 hours). If not configured the script will run once and then exit.
 
 ``` txt
@@ -82,19 +94,19 @@ Output a CSV file instead of a HTML file for the report.
 -Subject
 ```
 
-The email subject that the email should have. Encapulate with single or double quotes.
+The subject line that the email should have. Encapulate with single or double quotes.
 
 ``` txt
 -SendTo
 ```
 
-The e-mail address the log should be sent to.
+The email address the report should be sent to.
 
 ``` txt
 -From
 ```
 
-The from address the log should be sent from.
+The from address the report should be sent from.
 
 ``` txt
 -Smtp
@@ -120,10 +132,10 @@ The txt file containing the encrypted password for the user account.
 
 Connect to the SMTP server using SSL.
 
-### Example
+### Example Configuration
 
 ``` txt
 NetDev-Status.ps1 -List C:\foo\networkdevices.csv -O C:\foo -Refresh 300 -Light
 ```
 
-The script will execute using the list of network devices and output a html report called NetDev-Status-Report.htm to C:\foo. The status of the network devices will refresh every 5 minutes, and the web page will have a light theme instead of a dark theme.
+Using this example config, the script will execute using the list of network devices and output a html report called NetDev-Status-Report.htm to C:\foo. The status of the network devices will refresh every 5 minutes, and the web page will have a light theme instead of a dark theme.
