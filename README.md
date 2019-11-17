@@ -2,6 +2,8 @@
 
 PowerShell based network attached device monitor.
 
+For full instructions and documentation, [visit my blog post](https://gal.vin/2018/06/14/network-device-status)
+
 Please consider donating to support my work:
 
 * You can support me on a monthly basis [using Patreon.](https://www.patreon.com/mikegalvin)
@@ -9,13 +11,12 @@ Please consider donating to support my work:
 
 Network Device Status Monitor can also be downloaded from:
 
-* For full instructions and documentation, [visit my blog post](https://gal.vin/2018/06/14/network-device-status)
 * [The Microsoft TechNet Gallery](https://gallery.technet.microsoft.com/Network-Device-Status-088f7b00?redir=0)
 * [The PowerShell Gallery](https://www.powershellgallery.com/packages/NetDev-Status)
 
--Mike
-
 Tweet me if you have questions: [@mikegalvin_](https://twitter.com/mikegalvin_)
+
+-Mike
 
 ## Features and Requirements
 
