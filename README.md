@@ -2,7 +2,7 @@
 
 PowerShell based network attached device monitor.
 
-For full instructions and documentation, [visit my blog post](https://gal.vin/2018/06/14/network-device-status)
+For full instructions and documentation, [visit my blog post](https://gal.vin/posts/network-device-status)
 
 Please consider donating to support my work:
 
