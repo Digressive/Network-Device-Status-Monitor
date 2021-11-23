@@ -14,7 +14,7 @@
 
 .LICENSEURI
 
-.PROJECTURI https://gal.vin/2018/06/14/network-device-status
+.PROJECTURI https://gal.vin/posts/network-device-status
 
 .ICONURI
 
