@@ -11,10 +11,9 @@ Please consider donating to support my work:
 
 Network Device Status Monitor can also be downloaded from:
 
-* [The Microsoft TechNet Gallery](https://gallery.technet.microsoft.com/Network-Device-Status-088f7b00?redir=0)
 * [The PowerShell Gallery](https://www.powershellgallery.com/packages/NetDev-Status)
 
-Tweet me if you have questions: [@mikegalvin_](https://twitter.com/mikegalvin_)
+Join the [Discord](http://discord.gg/5ZsnJ5k) or Tweet me if you have questions: [@mikegalvin_](https://twitter.com/mikegalvin_)
 
 -Mike
 
