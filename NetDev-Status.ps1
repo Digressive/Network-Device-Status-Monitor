@@ -45,7 +45,7 @@
     The command is as follows:
 
     $creds = Get-Credential
-    $creds.Password | ConvertFrom-SecureString | Set-Content c:\foo\ps-script-pwd.txt
+    $creds.Password | ConvertFrom-SecureString | Set-Content C:\scripts\ps-script-pwd.txt
     
     .PARAMETER List
     The path to a CSV file with a list of IP addresses and device names to monitor separated by a comma.
