@@ -99,7 +99,7 @@ Output a CSV file instead of a HTML file for the report.
 -Subject
 ```
 
-The subject line that the email should have. Encapulate with single or double quotes.
+The subject line that the email should have. Encapsulate with single or double quotes.
 
 ``` txt
 -SendTo
