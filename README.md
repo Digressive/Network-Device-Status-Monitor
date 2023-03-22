@@ -13,7 +13,7 @@ Network Device Status Monitor can also be downloaded from:
 
 * [The PowerShell Gallery](https://www.powershellgallery.com/packages/NetDev-Status)
 
-Please report issues on Github via the issues tab.
+Please report any problems via the ‘issues’ tab on GitHub.
 
 -Mike
 
