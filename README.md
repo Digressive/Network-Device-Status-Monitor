@@ -1,6 +1,6 @@
 # Network Device Status Monitor (NDSM)
 
-PowerShell based network attached device monitor.
+## PowerShell based network attached device monitor
 
 For full instructions and documentation, [visit my blog post](https://gal.vin/posts/network-device-status)
 
@@ -76,3 +76,27 @@ NetDev-Status.ps1 -List C:\foo\networkdevices.csv -O C:\foo -Refresh 300 -Light
 ```
 
 Using this example config, the script will execute using the list of network devices and output a html report called NetDev-Status-Report.htm to C:\foo. The status of the network devices will refresh every 5 minutes, and the web page will have a light theme instead of a dark theme.
+
+## Change Log
+
+### 2019-10-02 v2.0
+
+* Added Microsoft Teams as an output location, for either offline alerts, or a 'full' report.
+* MS teams is limited to 10 devices. Not sure if it's a Teams/webhook limit, or my code. Will investigate.
+* Fixed bug where all devices are offline, a phantom device is added to the bottom of the offline list.
+* Cleaned up code, removing/not setting variables if they are not needed in the current mode.
+* Added console output for when the script is in 'monitor' mode.
+
+### 2019-09-04 v1.2
+
+* Added custom subject line for email.
+
+### 2019-02-23 v1.1
+
+* Updated the style of the web page with a cleaner look.
+* Added 'online' CSS animation when the web page is in monitor mode - this is configured by using the refresh switch. It will not display when in report mode (no refresh switch).
+
+### 2018-06-13 v1.0
+
+* First public release.
+* Based off Windows Server Status Monitor version 1.5 code.
