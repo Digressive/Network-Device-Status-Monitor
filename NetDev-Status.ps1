@@ -12,7 +12,7 @@
 
 .TAGS Network Device Status Report Monitor Teams CSV HTML Email
 
-.LICENSEURI
+.LICENSEURI https://github.com/Digressive/Network-Device-Status-Monitor?tab=MIT-1-ov-file
 
 .PROJECTURI https://gal.vin/posts/network-device-status
 
